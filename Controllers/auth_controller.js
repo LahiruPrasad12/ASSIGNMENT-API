@@ -33,7 +33,7 @@ exports.login = catchAsync(async (req, res, next) => {
 });
 
 
-/**Below functions are some middlewares */
+/**Below functions are some common functions */
 
 //created token
 const signToken = (id) => {
