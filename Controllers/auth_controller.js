@@ -6,10 +6,30 @@ const { promisify } = require("util");
 // const sendEmail = require("../Utils/email");
 const crypto = require("crypto");
 
+
 //Register new user
 exports.signup = catchAsync(async (req, res, next) => {
     const newUser = await User.create(req.body);
     createSendToken(newUser, 200, res);
+});
+
+
+//Login user
+exports.login = catchAsync(async (req, res, next) => {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        return next(new AppError("Please provide email and password!", 400));
+    }
+    //Check if user exists && password is correct
+    const user = await User.findOne({ email }).select("+password");
+
+    if (!user || !(await user.correctPassword(password, user.password))) {
+        return next(new AppError("Incorrect email or password", 401));
+    }
+
+    // // If everything ok, send token to client
+    createSendToken(user, 200, res);
 });
 
 
