@@ -5,17 +5,8 @@ const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
-const cors = require("cors");
 
 const app = express();
-
-//Configure the cors
-app.use(
-    cors({
-        origin: ["http://localhost:3000"],
-        credentials: true,
-    })
-);
 
 // GLOBAL MIDDLEWARES
 
