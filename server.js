@@ -7,14 +7,11 @@ const app = require('./app');
 dotenv.config({ path: './config.env' });
 
 
-//Configure the cors
-const app_url = process.env.APP_URL
-app.use(
-    cors({
-        origin: [app_url],
-        credentials: true,
-    })
-);
+// Configure the cors
+app.use(cors({
+    origin:["http://localhost:3000"],
+    credentials:true
+}));
 
 
 //Specified the port that application has been run

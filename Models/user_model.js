@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
-const autoIncrement = require("mongoose-auto-increment-2");
+// const autoIncrement = require("mongoose-auto-increment");
 
 const userSchema = new mongoose.Schema({
     first_name: {
@@ -49,15 +49,15 @@ const userSchema = new mongoose.Schema({
     },
 });
 
-//created id filed with autoincrement by 1
-autoIncrement.initialize(mongoose.connection);
-userSchema.plugin(autoIncrement.plugin, {
-    model: "User", // collection or table name in which you want to apply auto increment
-    field: "id", // field of model which you want to auto increment
-    startAt: 0, // start your auto increment value from 1
-    incrementBy: 1, // incremented by 1
-});
-userSchema.index({ name: "text", description: "text" });
+// //created id filed with autoincrement by 1
+// autoIncrement.initialize(mongoose.connection);
+// userSchema.plugin(autoIncrement.plugin, {
+//     model: "User", // collection or table name in which you want to apply auto increment
+//     field: "id", // field of model which you want to auto increment
+//     startAt: 0, // start your auto increment value from 1
+//     incrementBy: 1, // incremented by 1
+// });
+// userSchema.index({ name: "text", description: "text" });
 
 
 /**Middleware */

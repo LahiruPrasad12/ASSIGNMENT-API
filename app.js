@@ -5,8 +5,21 @@ const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
+const cors = require("cors");
+
+const authRouter = require("./Routes/auth_routes");
 
 const app = express();
+
+// Configure the cors
+const app_url = process.env.APP_URL
+app.use(
+    cors({
+        origin: ["http://localhost:3000"],
+        credentials: true,
+    })
+);
+
 
 // GLOBAL MIDDLEWARES
 
@@ -43,6 +56,8 @@ app.use(
         ],
     })
 );
+
+app.use("/", authRouter);
 
 app.all("*", (req, res, next) => {
    return 'aa'

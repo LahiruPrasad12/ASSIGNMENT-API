@@ -16,6 +16,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 
 //Login user
 exports.login = catchAsync(async (req, res, next) => {
+    console.log('ava')
     const { email, password } = req.body;
 
     if (!email || !password) {
