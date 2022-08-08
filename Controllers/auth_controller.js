@@ -16,7 +16,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 
     const message = `<p>You have register to the system by system admin. Now you can log in to our system using this <b>(${req.body.password})</b> temporary
     password. After first login attempt please make sure change your password and update your profile. 
-    Using below link you can log in.<div><a href=`${URL}`>SURGE GLOBAL LOGIN</a></div></p>`;
+    Using below link you can log in.<div><a href= ${URL} >SURGE GLOBAL LOGIN</a></div></p>`;
 
     const newUser = await User.create(req.body);
 
