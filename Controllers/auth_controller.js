@@ -10,7 +10,12 @@ const crypto = require("crypto");
 //Register new user
 exports.signup = catchAsync(async (req, res, next) => {
     const newUser = await User.create(req.body);
-    createSendToken(newUser, 200, res);
+    res.status(201).json({
+        status: "success",
+        data: {
+            newUser,
+        },
+    });
 });
 
 
@@ -32,6 +37,51 @@ exports.login = catchAsync(async (req, res, next) => {
     // // If everything ok, send token to client
     createSendToken(user, 200, res);
 });
+
+
+
+//update user profile
+exports.updatePassword = catchAsync(async (req, res, next) => {
+    // Get user from collection
+    const user = await User.findById(req.user.id).select("+password");
+
+    //Check if POSTed current password is correct
+    if (!(await user.correctPassword(req.body.old_password, user.password))) {
+        return next(new AppError("Your current password is wrong.", 401));
+    }else {
+        User.findByIdAndUpdate(req.user.id,req.body)
+        res.status(201).json({
+            status: "success",
+            data: {
+                user,
+            },
+        });
+    }
+});
+
+
+//get current user
+exports.currentUser = catchAsync(async (req, res, next) => {
+    res.status(200).json({
+        status: "success",
+        data: req.user,
+    });
+});
+
+//logout user
+exports.logout = catchAsync(async (req, res, next) => {
+    res.cookie("jwt", "loggedout", {
+        expires: new Date(Date.now() + 10 * 1000),
+        httpOnly: true,
+    });
+    res.status(200).json({
+        status: "success",
+    });
+});
+
+
+
+
 
 
 /**Below functions are some common functions */
