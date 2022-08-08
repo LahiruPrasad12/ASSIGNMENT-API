@@ -4,9 +4,9 @@ const authController = require("../Controllers/auth_controller");
 const router = express.Router();
 
 //This api-resource route for update and delete specific student
-router.route("/notices")
-    .get(authController.protect, noticeController.myAllNotices)
-    .post(authController.protect, noticeController.createNotice)
-    .patch(authController.protect, noticeController.updateMyNotice)
-    .delete(authController.protect, noticeController.deleteNotice);
+router.route("/")
+    .get(authController.protect, authController.restrictTo('student'),noticeController.myAllNotices)
+    .post(authController.protect, authController.restrictTo('student'), noticeController.createNotice)
+    .patch(authController.protect,  authController.restrictTo('student'),noticeController.updateMyNotice)
+    .delete(authController.protect,  authController.restrictTo('student'), noticeController.deleteNotice);
 module.exports = router;

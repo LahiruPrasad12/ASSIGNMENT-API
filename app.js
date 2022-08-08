@@ -8,6 +8,8 @@ const hpp = require("hpp");
 const cors = require("cors");
 
 const authRouter = require("./Routes/auth_routes");
+const adminRouter = require("./Routes/admin_routes");
+const noticeRouter = require("./Routes/notice_routes");
 const AppError = require("./Utils/AppError");
 
 const app = express();
@@ -60,6 +62,8 @@ app.use(
 const base = '/api/v1'
 
 app.use(`${base}/auth`, authRouter);
+app.use(`${base}/notices`, noticeRouter);
+app.use(`${base}/students`, adminRouter);
 
 app.all("*", (req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
