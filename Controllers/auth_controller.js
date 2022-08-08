@@ -9,6 +9,8 @@ const crypto = require("crypto");
 
 //Register new user
 exports.signup = catchAsync(async (req, res, next) => {
+    req.body.password = Math.random().toString(16).substr(2, 8);
+    console.log(req.body)
     const newUser = await User.create(req.body);
     res.status(201).json({
         status: "success",

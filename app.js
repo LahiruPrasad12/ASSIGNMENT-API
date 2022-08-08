@@ -56,8 +56,10 @@ app.use(
         ],
     })
 );
+const base = '/api/v1'
 
-app.use("/", authRouter);
+app.use(`${base}/auth`, authRouter);
+app.use(`${base}/auth`, authRouter);
 
 app.all("*", (req, res, next) => {
    return 'aa'
