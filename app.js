@@ -8,6 +8,7 @@ const hpp = require("hpp");
 const cors = require("cors");
 
 const authRouter = require("./Routes/auth_routes");
+const AppError = require("./Utils/AppError");
 
 const app = express();
 
@@ -59,10 +60,9 @@ app.use(
 const base = '/api/v1'
 
 app.use(`${base}/auth`, authRouter);
-app.use(`${base}/auth`, authRouter);
 
 app.all("*", (req, res, next) => {
-   return 'aa'
+    next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
 module.exports = app;

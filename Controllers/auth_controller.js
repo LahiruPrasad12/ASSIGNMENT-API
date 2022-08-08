@@ -36,7 +36,6 @@ exports.signup = catchAsync(async (req, res, next) => {
 
 //Login user
 exports.login = catchAsync(async (req, res, next) => {
-    console.log('ava')
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -57,14 +56,17 @@ exports.login = catchAsync(async (req, res, next) => {
 
 //update user profile
 exports.updatePassword = catchAsync(async (req, res, next) => {
+    console.log('ava')
+    console.log('122')
+
     // Get user from collection
-    const user = await User.findById(req.user.id).select("+password");
+    const user = await User.findById(req.user._id).select("+password");
 
     //Check if POSTed current password is correct
-    if (!(await user.correctPassword(req.body.old_password, user.password))) {
+    if (!(await user.correctPassword(req.body.current_password, user.password))) {
         return next(new AppError("Your current password is wrong.", 401));
     }else {
-        User.findByIdAndUpdate(req.user.id,req.body)
+        User.findByIdAndUpdate(req.user._id,req.body)
         res.status(201).json({
             status: "success",
             data: {
@@ -134,6 +136,7 @@ const createSendToken = (user, statusCode, res) => {
 
 //protected routes
 exports.protect = catchAsync(async (req, res, next) => {
+    console.log('ava1')
     // Getting token and check of it's there
     let token;
     if (
@@ -165,5 +168,6 @@ exports.protect = catchAsync(async (req, res, next) => {
 
     // GRANT ACCESS TO PROTECTED ROUTE AND SET USER AND GROUP ID GLOBALLY
     req.user = currentUser;
+    console.log(currentUser)
     next();
 });
