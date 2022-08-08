@@ -3,15 +3,28 @@ const catchAsync = require("../Utils/catchAsync");
 const AppError = require("../Utils/AppError");
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
-// const sendEmail = require("../Utils/email");
+const sendEmail = require("../utils/email");
 const crypto = require("crypto");
+
 
 
 //Register new user
 exports.signup = catchAsync(async (req, res, next) => {
     req.body.password = Math.random().toString(16).substr(2, 8);
-    console.log(req.body)
+
+    let URL = 'http://localhost:3000/';
+
+    const message = `<p>You have register to the system by system admin. Now you can log in to our system using this <b>(${req.body.password})</b> temporary
+    password. After first login attempt please make sure change your password and update your profile. 
+    Using below link you can log in.<div><a href=`${URL}`>SURGE GLOBAL LOGIN</a></div></p>`;
+
     const newUser = await User.create(req.body);
+
+    await sendEmail({
+        email: req.body.email,
+        subject: 'Congrats you are being a member of SURGE GLOBAL Company!!',
+        message:message
+    });
     res.status(201).json({
         status: "success",
         data: {
