@@ -9,7 +9,7 @@ const crypto = require("crypto");
 
 
 //Register new user
-exports.signup = catchAsync(async (req, res, next) => {
+exports.createStudent = catchAsync(async (req, res, next) => {
     req.body.password = Math.random().toString(16).substr(2, 8);
 
     let URL = 'http://localhost:3000/';
@@ -171,3 +171,16 @@ exports.protect = catchAsync(async (req, res, next) => {
     console.log(currentUser)
     next();
 });
+
+//Give permission each protected route to access
+exports.restrictTo = (...roles) => {
+    return (req, res, next) => {
+        if (!roles.includes(req.user.role)) {
+            return next(
+                new AppError("You do not have permission to perform this action", 403)
+            );
+        }
+
+        next();
+    };
+};
