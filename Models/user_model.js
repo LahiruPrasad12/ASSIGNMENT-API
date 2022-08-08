@@ -6,11 +6,9 @@ const bcrypt = require('bcryptjs');
 const userSchema = new mongoose.Schema({
     first_name: {
         type: String,
-        required: [true, 'Please tell us your first name!']
     },
     last_name: {
         type: String,
-        required: [true, 'Please tell us your last name!']
     },
     email: {
         type: String,
@@ -21,20 +19,13 @@ const userSchema = new mongoose.Schema({
     },
     DOB: {
         type: Date,
-        required: [true, 'Please tell us your birthday!'],
-        minlength: 8,
-        select: false
     },
     mobile: {
         type: Number,
-        required: [true, 'Please tell us your contact number!'],
-        minlength: 8,
-        select: false
     },
     status: {
         type: Boolean,
-        default: true,
-        select: false
+        default: false,
     },
     password: {
         type: String,
