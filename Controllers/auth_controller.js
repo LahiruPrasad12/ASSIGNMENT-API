@@ -64,7 +64,14 @@ exports.updateMyAccount = catchAsync(async (req, res, next) => {
     if (!(await user.correctPassword(req.body.current_password, user.password))) {
         return next(new AppError("Your current password is wrong.", 401));
     }else {
-        await User.findByIdAndUpdate(req.user._id,req.body)
+        user.first_name = req.body.first_name
+        user.last_name = req.body.last_name
+        user.DOB = req.body.DOB
+        user.mobile = req.body.mobile
+        user.password = req.body.password
+        user.status = true
+
+        await user.save()
         res.status(201).json({
             status: "success",
             data: {

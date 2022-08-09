@@ -54,12 +54,6 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
-
-//use this query to filter all users whose active status only true
-userSchema.pre(/^find/, function (next) {
-    this.find({ status: { $ne: false } });
-    next();
-});
 /**End of the middleware */
 
 
