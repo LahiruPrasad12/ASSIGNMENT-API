@@ -8,12 +8,4 @@ describe('log in user', () => {
         })
         expect(respond.status).toEqual(400)
     });
-
-    it('return bad request if user not provide correct email or password', async () => {
-        const respond = await request(app).post('/api/v1/auth/signing').send({
-            email:'admin@gmail.com',
-            password:'admin123'
-        })
-        expect(respond.status).toEqual(500)
-    },70000)
 })
