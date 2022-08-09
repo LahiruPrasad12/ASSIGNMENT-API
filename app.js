@@ -17,7 +17,7 @@ const app = express();
 const app_url = process.env.APP_URL
 app.use(
     cors({
-        origin: ["http://localhost:3000"],
+        origin: ["https://assignment-ui.vercel.app"],
         credentials: true,
     })
 );
