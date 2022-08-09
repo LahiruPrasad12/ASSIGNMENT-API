@@ -55,9 +55,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
 
 //update user profile
-exports.updatePassword = catchAsync(async (req, res, next) => {
-    console.log('ava')
-    console.log('122')
+exports.updateMyAccount = catchAsync(async (req, res, next) => {
 
     // Get user from collection
     const user = await User.findById(req.user._id).select("+password");
@@ -66,7 +64,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
     if (!(await user.correctPassword(req.body.current_password, user.password))) {
         return next(new AppError("Your current password is wrong.", 401));
     }else {
-        User.findByIdAndUpdate(req.user._id,req.body)
+        await User.findByIdAndUpdate(req.user._id,req.body)
         res.status(201).json({
             status: "success",
             data: {
