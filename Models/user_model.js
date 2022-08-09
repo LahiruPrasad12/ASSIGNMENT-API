@@ -40,16 +40,6 @@ const userSchema = new mongoose.Schema({
     },
 });
 
-// //created id filed with autoincrement by 1
-// autoIncrement.initialize(mongoose.connection);
-// userSchema.plugin(autoIncrement.plugin, {
-//     model: "User", // collection or table name in which you want to apply auto increment
-//     field: "id", // field of model which you want to auto increment
-//     startAt: 0, // start your auto increment value from 1
-//     incrementBy: 1, // incremented by 1
-// });
-// userSchema.index({ name: "text", description: "text" });
-
 
 /**Middleware */
 
@@ -64,6 +54,12 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
+
+//use this query to filter all users whose active status only true
+userSchema.pre(/^find/, function (next) {
+    this.find({ status: { $ne: false } });
+    next();
+});
 /**End of the middleware */
 
 

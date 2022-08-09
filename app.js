@@ -63,7 +63,7 @@ const base = '/api/v1'
 
 app.use(`${base}/auth`, authRouter);
 app.use(`${base}/notices`, noticeRouter);
-app.use(`${base}/students`, adminRouter);
+app.use(`${base}/admin`, adminRouter);
 
 app.all("*", (req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
