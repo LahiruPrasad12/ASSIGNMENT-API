@@ -18,7 +18,6 @@ User.findOne({account_type: 'admin'}).then(async (res) => {
             await User.findByIdAndDelete(res._id)
         }
         await User.create(admin)
-        console.log('admin created')
     } catch (e) {
         console.log(e.message)
     }

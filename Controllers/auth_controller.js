@@ -143,7 +143,6 @@ const createSendToken = (user, statusCode, res) => {
 
 //protected routes
 exports.protect = catchAsync(async (req, res, next) => {
-    console.log('ava1')
     // Getting token and check of it's there
     let token;
     if (
