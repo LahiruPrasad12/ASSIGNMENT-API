@@ -1,5 +1,5 @@
 const User = require('../Models/user_model');
-const DB = require('../dbConfig/index')
+const DB = require('../dbConfig')
 
 const admin = {
     first_name: 'admin',
