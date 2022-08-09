@@ -1,10 +1,10 @@
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: '../config.env' });
 
 //Configured the database connection
-const URL = process.env.DATABASE||'mongodb+srv://Admin:hash99lahi20@hotelsobana.z6log.mongodb.net/project_managment?retryWrites=true&w=majority';
+const URL = process.env.DATABASE;
 mongoose
     .connect(URL,{
         useNewUrlParser: true,
