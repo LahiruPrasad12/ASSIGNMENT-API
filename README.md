@@ -1,7 +1,5 @@
 # ASSIGNMENT API
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Setup Environment
 
     1. Clone project : https://github.com/LahiruPrasad12/ASSIGNMENT-API.git
