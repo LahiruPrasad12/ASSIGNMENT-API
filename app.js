@@ -5,7 +5,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
 const cors = require("cors");
-
+const compression = require('compression')
 const authRouter = require("./Routes/auth_routes");
 const adminRouter = require("./Routes/admin_routes");
 const noticeRouter = require("./Routes/notice_routes");
@@ -58,6 +58,8 @@ app.use(
         ],
     })
 );
+
+app.use(compression())
 const base = '/api/v1'
 
 app.use(`${base}/auth`, authRouter);
