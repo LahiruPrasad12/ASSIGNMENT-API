@@ -41,6 +41,7 @@ exports.login = catchAsync(async (req, res, next) => {
     if (!email || !password) {
         return next(new AppError("Please provide email and password!", 400));
     }
+
     //Check if user exists && password is correct
     const user = await User.findOne({ email }).select("+password");
 
@@ -50,6 +51,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
     // // If everything ok, send token to client
     createSendToken(user, 200, res);
+
 });
 
 
@@ -188,4 +190,16 @@ exports.restrictTo = (...roles) => {
 
         next();
     };
+};
+
+exports.cal = (x,y)=>{
+    return x*y;
+}
+
+exports.test = (user, statusCode, res) => {
+
+    res.status(200).json({
+        status: "success",
+
+    });
 };
