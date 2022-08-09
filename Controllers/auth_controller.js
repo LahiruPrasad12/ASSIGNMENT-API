@@ -3,7 +3,7 @@ const catchAsync = require("../Utils/catchAsync");
 const AppError = require("../Utils/AppError");
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
-const sendEmail = require("../utils/email");
+const sendEmail = require("../Utils/email");
 const crypto = require("crypto");
 
 
