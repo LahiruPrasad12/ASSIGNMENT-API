@@ -14,17 +14,20 @@ const sendEmail = async options => {
 
 
     const transporter = nodemailer.createTransport({
-        service: "gmail",
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
         auth: {
-            user: "menakajayasekara9@gmail.com",
-            pass: "Menu123@#"
-        }
+            user: "avcfgb507@gmail.com",
+            pass: "ovcivoxojtdgbnuo"
+        },
     });
+
 
 
     // 2) Define the email options
     const mailOptions = {
-        from: 'SLIIT <SLIIT@gmail.com>',
+        from: 'SURGE <Surge@gmail.com>',
         to: options.email,
         subject: options.subject,
         html: options.message,
