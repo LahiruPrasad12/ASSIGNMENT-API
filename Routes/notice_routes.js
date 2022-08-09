@@ -5,8 +5,12 @@ const router = express.Router();
 
 //This api-resource route for update and delete specific student
 router.route("/")
-    .get(authController.protect, authController.restrictTo('student'),noticeController.myAllNotices)
+    .get(authController.protect, authController.restrictTo('student'), noticeController.myAllNotices)
     .post(authController.protect, authController.restrictTo('student'), noticeController.createNotice)
-    .patch(authController.protect,  authController.restrictTo('student'),noticeController.updateMyNotice)
-    .delete(authController.protect,  authController.restrictTo('student'), noticeController.deleteNotice);
+
+
+router.route("/:id")
+    .patch(authController.protect, authController.restrictTo('student'), noticeController.updateMyNotice)
+    .delete(authController.protect, authController.restrictTo('student'), noticeController.deleteNotice);
+
 module.exports = router;
