@@ -4,7 +4,7 @@ const Filter = require('../Utils/Fliters')
 
 //get all notices
 exports.allUsers = catchAsync(async (req, res, next) => {
-    const Respond = new Filter(User.find({ status: { $ne: false } }), req.query).filter().sort().limitFields().paginate();
+    const Respond = new Filter(User.find({ status: { $ne: false },role:'student' }), req.query).filter().sort().limitFields().paginate();
 
     const users = await Respond.query;
 
