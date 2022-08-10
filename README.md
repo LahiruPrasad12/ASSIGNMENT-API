@@ -16,11 +16,8 @@
 ## Deployed Link
     https://mighty-garden-33602.herokuapp.com
 
-## Dummy Credentials
+## Admin Credentials
     Admin : admin@gmail.com
             admin123
-
-    Student : sihinaoshada380@gmail.com
-              90c45947
 
    
